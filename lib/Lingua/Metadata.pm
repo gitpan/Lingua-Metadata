@@ -4,7 +4,7 @@ package Lingua::Metadata;
 
 use LWP::Simple;
 
-# ABSTRACT: turns baubles into trinkets
+# ABSTRACT: Returns information about languages.
 
 use constant SERVICE_URL => 'http://w2c.martin.majlis.cz/language/';
 
@@ -16,17 +16,46 @@ sub get_iso
     my $label = shift;
     
     if ( ! defined($label) ) {
-        return undef;
+        return;
     }
     
     if ( ! defined($cache_iso{$label}) ) {
-        print STDERR "Query - $label\n";
         my $url = SERVICE_URL . '?alias=' . $label;
         $cache_iso{$label} = get($url);
     }
     
     return $cache_iso{$label};    
 }
+
+
+sub get_language_metadata
+{
+    my $language = shift;
+    
+    my %result = ();    
+    my $iso = get_iso($language);
+    
+    if ( ! defined($iso) ) { 
+        return $iso;
+    } elsif ( $iso eq '' ) {
+        return \%result;
+    }
+    
+    my $url = SERVICE_URL . '?action=GET&format=TXT&lang=' . $iso;
+    my $content = get($url);
+    
+
+    if ( $content ) {
+        for my $line ( split(/\n/, $content) ) {
+            chomp $line;
+            my @parts = split(/\t/, $line);
+            $result{$parts[1]} = $parts[2]; 
+        }
+    }
+    
+    return \%result;    
+}
+
 
 1;
 
@@ -35,11 +64,11 @@ __END__
 
 =head1 NAME
 
-Lingua::Metadata - turns baubles into trinkets
+Lingua::Metadata - Returns information about languages.
 
 =head1 VERSION
 
-version 0.001
+version 0.001_01
 
 =head1 SYNOPSIS
 
@@ -49,9 +78,31 @@ version 0.001
 
 Returns an ISO 639-3 code for language. 
 
-It returns undef, if the service is down or undef is passed as an argument.
-It returns empty string, if the language couldn't be converted.
-It returns ISO 639-3 otherwise.
+=head4 Returns $iso
+
+=over 4
+
+=item * It returns undef, if the service is down or undef is passed as an argument.
+
+=item * It returns empty string, if the language couldn't be converted.
+
+=item * It returns ISO 639-3 otherwise.
+
+=back
+
+=head2 get_language_metadata ($langage)
+
+Returns all metadata for specified language. 
+
+=head4 Returns \%metadata = { key1 => value1, ... }
+
+=over 4
+
+=item * It returns undef, if the service is down or undef is passed as an argument.
+
+=item * It returns reference to the hash containing all metadata.
+
+=back
 
 =head1 AUTHOR
 

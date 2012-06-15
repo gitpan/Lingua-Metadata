@@ -1,8 +1,10 @@
 ---
-abstract: 'turns baubles into trinkets'
+abstract: 'Returns information about languages.'
 author:
   - 'Martin Majlis <martin@majlis.cz>'
-build_requires: {}
+build_requires:
+  English: 0
+  Test::More: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.31
 dynamic_config: 0
@@ -12,4 +14,9 @@ meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: Lingua-Metadata
-version: 0.001
+requires:
+  LWP::Simple: 0
+  constant: 0
+  strict: 0
+  warnings: 0
+version: 0.001_01

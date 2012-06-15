@@ -4,9 +4,14 @@ META.yml
 Makefile.PL
 README
 README.md
+aaa.html
 dist.ini
 lib/Lingua/Metadata.pm
+pod2htmd.tmp
+pod2htmi.tmp
 t/00-everything_loads.t
 t/01-get_iso.t
-t/pod-coverage.t
-t/pod.t
+t/02-get_language_metadata.t
+t/author-critic.t
+t/release-pod-coverage.t
+t/release-pod-syntax.t

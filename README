@@ -1,9 +1,9 @@
 
 
 This archive contains the distribution Lingua-Metadata,
-version 0.001:
+version 0.001_01:
 
-  turns baubles into trinkets
+  Returns information about languages.
 
 This software is Copyright (c) 2012 by Martin Majlis.
 

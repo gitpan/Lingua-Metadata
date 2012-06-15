@@ -9,9 +9,12 @@ use ExtUtils::MakeMaker 6.31;
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'turns baubles into trinkets',
+  'ABSTRACT' => 'Returns information about languages.',
   'AUTHOR' => 'Martin Majlis <martin@majlis.cz>',
-  'BUILD_REQUIRES' => {},
+  'BUILD_REQUIRES' => {
+    'English' => '0',
+    'Test::More' => '0'
+  },
   'CONFIGURE_REQUIRES' => {
     'ExtUtils::MakeMaker' => '6.31'
   },
@@ -19,8 +22,13 @@ my %WriteMakefileArgs = (
   'EXE_FILES' => [],
   'LICENSE' => 'bsd',
   'NAME' => 'Lingua::Metadata',
-  'PREREQ_PM' => {},
-  'VERSION' => '0.001',
+  'PREREQ_PM' => {
+    'LWP::Simple' => '0',
+    'constant' => '0',
+    'strict' => '0',
+    'warnings' => '0'
+  },
+  'VERSION' => '0.001_01',
   'test' => {
     'TESTS' => 't/*.t'
   }
