@@ -19,4 +19,4 @@ requires:
   constant: 0
   strict: 0
   warnings: 0
-version: 0.001_01
+version: 0.002

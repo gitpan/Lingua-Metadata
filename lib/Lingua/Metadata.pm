@@ -68,7 +68,7 @@ Lingua::Metadata - Returns information about languages.
 
 =head1 VERSION
 
-version 0.001_01
+version 0.002
 
 =head1 SYNOPSIS
 
@@ -92,7 +92,19 @@ Returns an ISO 639-3 code for language.
 
 =head2 get_language_metadata ($langage)
 
-Returns all metadata for specified language. 
+Returns all metadata for specified language.
+
+=head4 Examples
+
+  my $ces_metadata = Lingua::Metadata::get_language_metadata("ces");
+  my $cs_metadata = Lingua::Metadata::get_language_metadata("cs");
+  my $czech_metadata = Lingua::Metadata::get_language_metadata("czech");
+  my $cestina_metadata = Lingua::Metadata::get_language_metadata("čeština");
+  
+  ( $ces_metadata{'iso 639-3'} eq $cs_metadata{'iso 639-3'} and
+    $cs_metadata{'iso 639-3'} eq $czech_metadata{'iso 639-3'} and
+    $czech_metadata{'iso 639-3'} eq $cestina_metadata{'iso 639-3'} and
+    $cestina_metadata{'iso 639-3'} eq 'ces' ) or die; 
 
 =head4 Returns \%metadata = { key1 => value1, ... }
 
