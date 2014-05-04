@@ -4,13 +4,14 @@ package Lingua::Metadata;
 
 use LWP::Simple;
 
-our $VERSION = '0.004'; # VERSION
+our $VERSION = '0.005'; # VERSION
 
 # ABSTRACT: Returns information about languages.
 
 use constant SERVICE_URL => 'http://w2c.martin.majlis.cz/language/';
 
 our %cache_iso = ();
+our %cache_metadata = ();
 
 
 sub get_iso
@@ -44,17 +45,21 @@ sub get_language_metadata
     }
 
     my $url = SERVICE_URL . '?action=GET&format=TXT&lang=' . $iso;
-    my $content = get($url);
 
-    if ( $content ) {
-        for my $line ( split(/\n/, $content) ) {
-            chomp $line;
-            my @parts = split(/\t/, $line);
-            $result{$parts[1]} = $parts[2];
+    if ( ! defined($cache_metadata{$iso}) ) {
+        my $content = get($url);
+
+        if ( $content ) {
+            for my $line ( split(/\n/, $content) ) {
+                chomp $line;
+                my @parts = split(/\t/, $line);
+                $result{$parts[1]} = $parts[2];
+            }
         }
+        $cache_metadata{$iso} = \%result;
     }
 
-    return \%result;
+    return $cache_metadata{$iso};
 }
 
 
@@ -72,9 +77,12 @@ Lingua::Metadata - Returns information about languages.
 
 =head1 VERSION
 
-version 0.004
+version 0.005
 
 =head1 SYNOPSIS
+
+This package queries L<Language Metadata Service|http://w2c.martin.majlis.cz/language/>
+to retrieve various information about languages.
 
 =head1 METHODS
 

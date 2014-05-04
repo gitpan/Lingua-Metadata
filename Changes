@@ -1,3 +1,6 @@
+0.005 2014-05-04
+ - Caching for service calls was added.
+
 0.003 2012-06-28
  - Documentation was extended.
 

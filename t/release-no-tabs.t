@@ -20,6 +20,7 @@ my @files = (
     't/00-everything_loads.t',
     't/01-get_iso.t',
     't/02-get_language_metadata.t',
+    't/03-caching.t',
     't/author-critic.t',
     't/author-test-eol.t',
     't/release-cpan-changes.t',

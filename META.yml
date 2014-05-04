@@ -7,6 +7,7 @@ build_requires:
   IO::Handle: 0
   IPC::Open3: 0
   Test::More: 0
+  Time::HiRes: 0
   perl: 5.006
 configure_requires:
   ExtUtils::MakeMaker: 6.30
@@ -22,4 +23,4 @@ requires:
   constant: 0
   strict: 0
   warnings: 0
-version: 0.004
+version: 0.005
